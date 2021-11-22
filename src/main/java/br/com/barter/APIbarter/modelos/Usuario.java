@@ -1,6 +1,6 @@
 package br.com.barter.APIbarter.modelos;
 
-public class Usuarios {
+public class Usuario {
 	Long id;
 	String nome;
 	String nomeUsuario;

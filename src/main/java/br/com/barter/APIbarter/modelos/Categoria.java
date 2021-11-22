@@ -1,9 +1,13 @@
 package br.com.barter.APIbarter.modelos;
 
-public class Produtos {
+public class Categoria {
+	
 	Long id;
 	String nome;
 	String descricao;
-	String imgUrl;
+	
+	
+	Produto produto;
+	
 
 }
