@@ -54,6 +54,7 @@ public class UsuariosRestController {
 			return new ResponseEntity<UsuarioDto>(HttpStatus.NO_CONTENT);
 		}
 		
+		
 		return new ResponseEntity<UsuarioDto>(usuario,HttpStatus.OK);
 		
 		}
