@@ -1,13 +1,16 @@
 package br.com.barter.APIbarter.modelos;
 
+import lombok.Data;
+
+@Data
 public class Categoria {
 	
-	Long id;
-	String nome;
-	String descricao;
+	private int codigo_categoria;
+	private String nome;
+	private String descricao;
 	
 	
-	Produto produto;
+	private Produto produto;
 	
 
 }
