@@ -10,5 +10,5 @@ public class ProdutoDto {
 	private String descricao;
 	private String imgUrl;
 	private int codigo_categoria;
-	
+	private int codigo_usuario;
 }
