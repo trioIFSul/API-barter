@@ -1,19 +1,15 @@
 package br.com.barter.APIbarter.dto;
 
-import br.com.barter.APIbarter.modelos.Produto;
 import lombok.Data;
 
 @Data
 public class CategoriaDto {
 
 	
-	Long id;
-	String nome;
-	String descricao;
+	private String id;
+	private int codigo_categoria;
+	private String nome;
+	private String descricao;
 	
 	
-	Produto produto;
-	
-	
-
 }
