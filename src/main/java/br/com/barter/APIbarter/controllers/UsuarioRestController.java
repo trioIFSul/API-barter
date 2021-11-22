@@ -20,7 +20,7 @@ import br.com.barter.APIbarter.service.api.UsuarioServiceAPI;
 @RestController
 @RequestMapping(value = "/usuarios/api/v1")
 @CrossOrigin("*")
-public class UsuariosRestController {
+public class UsuarioRestController {
 	
 	@Autowired
 	private UsuarioServiceAPI usuarioServiceAPI;

@@ -1,5 +1,8 @@
 package br.com.barter.APIbarter.dto;
 
+import lombok.Data;
+
+@Data
 public class UsuarioDto {
 
 	private String id;
