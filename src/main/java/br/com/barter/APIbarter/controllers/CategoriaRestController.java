@@ -28,6 +28,7 @@ public class CategoriaRestController {
 	@GetMapping(value = "/all")
 	public List<CategoriaDto> getAll() throws Exception {
 		return categoriaServiceAPI.getAll();
+		
 	}
 
 	@GetMapping(value = "/find/{id}")
