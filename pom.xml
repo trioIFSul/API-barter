@@ -46,11 +46,16 @@
 			<artifactId>firebase-admin</artifactId>
 			<version>6.11.0</version>
 		</dependency>
-		<dependency>
 		
+		<dependency>		
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.9.3</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>			
 		</dependency>
 		
 	</dependencies>
