@@ -16,26 +16,32 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.barter.APIbarter.dto.UsuarioDto;
 import br.com.barter.APIbarter.modelos.Usuario;
 import br.com.barter.APIbarter.service.api.UsuarioServiceAPI;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping(value = "/usuarios/api/v1")
-@CrossOrigin("*")
+@Api(value = "API REST Api-barter")
+@CrossOrigin(origins="*")
 public class UsuarioRestController {
 	
 	@Autowired
 	private UsuarioServiceAPI usuarioServiceAPI;
 	
 	@GetMapping(value = "/all")
+	@ApiOperation(value="Retorna uma lista de Usuários")
 	public List<UsuarioDto> getAll() throws Exception{
 		return usuarioServiceAPI.getAll();	
 		}
 	
 	@GetMapping(value = "/find/{id}")
+	@ApiOperation(value="Retorna usuário único por id")
 	public UsuarioDto find (@PathVariable String id) throws Exception{
 		return usuarioServiceAPI.get(id);
 	}
 	
 	@PostMapping(value = "/save/{id}")
+	@ApiOperation(value="Salva um usuário")
 	public ResponseEntity<String> save (@RequestBody Usuario usuario, @PathVariable String id) throws Exception {
 	if (id == null || id.length() == 0 || id.equals("null")) {
 		id = usuarioServiceAPI.save(usuario);
@@ -46,6 +52,7 @@ public class UsuarioRestController {
 	}
 	
 	@GetMapping(value = "/delete/{id}")
+	@ApiOperation(value="Deleta um usuário por id")
 	public ResponseEntity<UsuarioDto> delete (@PathVariable String id) throws Exception{
 		UsuarioDto usuario = usuarioServiceAPI.get(id);
 		if (usuario != null) {
