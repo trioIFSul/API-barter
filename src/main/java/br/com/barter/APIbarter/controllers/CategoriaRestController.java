@@ -3,6 +3,7 @@ package br.com.barter.APIbarter.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,6 +27,7 @@ public class CategoriaRestController {
 	private CategoriaServiceAPI categoriaServiceAPI;
 
 	@GetMapping(value = "/all")
+	@Cacheable(value="listaDeCategorias")
 	public List<CategoriaDto> getAll() throws Exception {
 		return categoriaServiceAPI.getAll();
 		
@@ -36,7 +38,6 @@ public class CategoriaRestController {
 		return categoriaServiceAPI.get(id);
 	}
 	
-
 	@PostMapping(value = "/save/{id}")
 	public ResponseEntity<String> save(@RequestBody Categoria categoria, @PathVariable String id) throws Exception {
 	
