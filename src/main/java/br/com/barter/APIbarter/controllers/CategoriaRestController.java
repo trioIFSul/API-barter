@@ -3,6 +3,7 @@ package br.com.barter.APIbarter.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +46,7 @@ public class CategoriaRestController {
 	
 	@PostMapping(value = "/save/{id}")
 	@ApiOperation(value="Salva uma categoria")
+	@CacheEvict(value = "listaDeCategorias", allEntries = true)
 	public ResponseEntity<String> save(@RequestBody Categoria categoria, @PathVariable String id) throws Exception {
 	
 		if (id == null || id.length() == 0 || id.equals("null")) {
