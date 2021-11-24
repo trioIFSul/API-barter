@@ -2,6 +2,8 @@ package br.com.barter.APIbarter.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +45,7 @@ public class ProdutoRestController {
 
 	@PostMapping(value = "/save/{id}")
 	@ApiOperation(value="Salva um produto")
-	public ResponseEntity<String> save(@RequestBody Produto produto, @PathVariable String id) throws Exception {
+	public ResponseEntity<String> save(@RequestBody @Valid Produto produto, @PathVariable String id) throws Exception {
 		if (id == null || id.length() == 0 || id.equals("null")) {
 			id = produtoServiceAPI.save(produto);
 		} else {
