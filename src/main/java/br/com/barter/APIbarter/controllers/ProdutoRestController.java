@@ -20,6 +20,8 @@ import br.com.barter.APIbarter.modelos.Produto;
 import br.com.barter.APIbarter.service.api.ProdutoServiceAPI;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping(value = "/produtos/api/v1/")
@@ -33,18 +35,27 @@ public class ProdutoRestController {
 	
 	@GetMapping(value = "/all")
 	@ApiOperation(value="Retorna uma lista de Produtos")
+	@ApiResponses({
+		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!")
+	})
 	public List<ProdutoDto> getAll() throws Exception {
 		return produtoServiceAPI.getAll();
 	}
 
 	@GetMapping(value = "/find/{id}")
-	@ApiOperation(value="Retorna produto único por id")
+	@ApiOperation(value="Retorna um produto", notes = "Este endpoint retorna um produto pelo String ID")
+	@ApiResponses({
+		@ApiResponse(code = 204, message = "Busca de produto pelo Id efetuada com sucesso!")
+	})
 	public ProdutoDto find(@PathVariable String id) throws Exception {
 		return produtoServiceAPI.get(id);
 	}
 
 	@PostMapping(value = "/save/{id}")
-	@ApiOperation(value="Salva um produto")
+	@ApiOperation(value="Cadastra e Atualiza um produto", notes = "Parâmetro null cria um novo produto e Parâmetro ID atualiza um produto")
+	@ApiResponses({
+		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!")
+	})
 	public ResponseEntity<String> save(@RequestBody @Valid Produto produto, @PathVariable String id) throws Exception {
 		if (id == null || id.length() == 0 || id.equals("null")) {
 			id = produtoServiceAPI.save(produto);
@@ -55,7 +66,10 @@ public class ProdutoRestController {
 	}
 
 	@GetMapping(value = "/delete/{id}")
-	@ApiOperation(value="Deleta um produto por id")
+	@ApiOperation(value="Deleta um produto", notes = "Usar parâmetro id String para deletar um produto")
+	@ApiResponses({
+		@ApiResponse(code = 204, message = "Produto excluído com sucesso!")
+	})
 	public ResponseEntity<ProdutoDto> delete(@PathVariable String id) throws Exception {
 		ProdutoDto produto = produtoServiceAPI.get(id);
 		if (produto != null) {

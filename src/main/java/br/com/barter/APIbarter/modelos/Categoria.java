@@ -18,7 +18,7 @@ public class Categoria {
 	private int codigo_categoria;
 	@NotNull @NotEmpty @Length (min = 5)
 	private String nome;
-	@NotNull @NotEmpty @Length (min = 20)
+	@NotNull @NotEmpty @Length (min = 5)
 	private String descricao;
 	
 

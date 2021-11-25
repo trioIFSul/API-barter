@@ -22,6 +22,8 @@ import br.com.barter.APIbarter.modelos.Categoria;
 import br.com.barter.APIbarter.service.api.CategoriaServiceAPI;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping(value = "/categorias/api/v1/")
@@ -35,20 +37,29 @@ public class CategoriaRestController {
 	@GetMapping(value = "/all")
 	@Cacheable(value="listaDeCategorias")
 	@ApiOperation(value="Retorna uma lista de Categorias")
+	@ApiResponses({
+		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!")
+	})
 	public List<CategoriaDto> getAll() throws Exception {
 		return categoriaServiceAPI.getAll();
 		
 	}
 
 	@GetMapping(value = "/find/{id}")
-	@ApiOperation(value="Retorna categoria única por id")
+	@ApiOperation(value="Retorna uma categoria", notes = "Este endpoint retorna uma categoria pelo String ID")
+	@ApiResponses({
+		@ApiResponse(code = 204, message = "Busca de categoria pelo Id efetuada com sucesso!")
+	})
 	public CategoriaDto find(@PathVariable String id) throws Exception {
 		return categoriaServiceAPI.get(id);
 	}
 	
 	@PostMapping(value = "/save/{id}")
-	@ApiOperation(value="Salva uma categoria")
+	@ApiOperation(value="Cadastra e Atualiza uma categoria", notes = "Parâmetro null cria uma nova categoria e Parâmetro ID atualiza uma categoria")
 	@CacheEvict(value = "listaDeCategorias", allEntries = true)
+	@ApiResponses({
+		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!")
+	})
 	public ResponseEntity<String> save(@RequestBody @Valid Categoria categoria, @PathVariable String id) throws Exception {
 	
 		if (id == null || id.length() == 0 || id.equals("null")) {
@@ -62,7 +73,10 @@ public class CategoriaRestController {
 
 	
 	@GetMapping(value = "/delete/{id}")
-	@ApiOperation(value="Deleta uma categoria por id")
+	@ApiOperation(value="Deleta uma categoria", notes = "Usar parâmetro id String para deletar uma categoria")
+	@ApiResponses({
+		@ApiResponse(code = 204, message = "Categoria excluída com sucesso!")
+	})
 	public ResponseEntity<CategoriaDto> delete(@PathVariable String id) throws Exception {
 		CategoriaDto categoria = categoriaServiceAPI.get(id);
 		

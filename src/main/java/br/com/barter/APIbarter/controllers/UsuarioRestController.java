@@ -20,6 +20,8 @@ import br.com.barter.APIbarter.modelos.Usuario;
 import br.com.barter.APIbarter.service.api.UsuarioServiceAPI;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping(value = "/usuarios/api/v1")
@@ -32,18 +34,27 @@ public class UsuarioRestController {
 	
 	@GetMapping(value = "/all")
 	@ApiOperation(value="Retorna uma lista de Usuários")
+	@ApiResponses({
+		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!")
+	})
 	public List<UsuarioDto> getAll() throws Exception{
 		return usuarioServiceAPI.getAll();	
 		}
 	
 	@GetMapping(value = "/find/{id}")
-	@ApiOperation(value="Retorna usuário único por id")
+	@ApiOperation(value="Retorna um usuário", notes = "Este endpoint retorna um usuário pelo String Id")
+	@ApiResponses({
+		@ApiResponse(code = 204, message = "Busca de usuário pelo Id efetuada com sucesso!")
+	})
 	public UsuarioDto find (@PathVariable String id) throws Exception{
 		return usuarioServiceAPI.get(id);
 	}
 	
 	@PostMapping(value = "/save/{id}")
-	@ApiOperation(value="Salva um usuário")
+	@ApiOperation(value="Cadastra e Atualiza um usuário", notes = "Parâmetro null cria um novo usuário e Parâmetro Id atualiza um usuário")
+	@ApiResponses({
+		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!")
+	})
 	public ResponseEntity<String> save (@RequestBody @Valid Usuario usuario, @PathVariable String id) throws Exception {
 	if (id == null || id.length() == 0 || id.equals("null")) {
 		id = usuarioServiceAPI.save(usuario);
@@ -54,7 +65,10 @@ public class UsuarioRestController {
 	}
 	
 	@GetMapping(value = "/delete/{id}")
-	@ApiOperation(value="Deleta um usuário por id")
+	@ApiOperation(value="Deleta um usuário", notes = "Usar parâmetro id String para deletar um usuário")
+	@ApiResponses({
+		@ApiResponse(code = 204, message = "Usuário excluído com sucesso!")
+	})
 	public ResponseEntity<UsuarioDto> delete (@PathVariable String id) throws Exception{
 		UsuarioDto usuario = usuarioServiceAPI.get(id);
 		if (usuario != null) {
