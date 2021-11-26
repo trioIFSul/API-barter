@@ -25,6 +25,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+
 @RestController
 @RequestMapping(value = "/categorias/api/v1/")
 @Api(value = "API REST Api-barter")
@@ -60,6 +61,7 @@ public class CategoriaRestController {
 	@ApiResponses({
 		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!")
 	})
+
 	public ResponseEntity<String> save(@RequestBody @Valid Categoria categoria, @PathVariable String id) throws Exception {
 	
 		if (id == null || id.length() == 0 || id.equals("null")) {
