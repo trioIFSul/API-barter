@@ -35,7 +35,10 @@ public class UsuarioRestController {
 	@GetMapping(value = "/all")
 	@ApiOperation(value="Retorna uma lista de Usuários")
 	@ApiResponses({
-		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!")
+		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!"),
+		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
+		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public List<UsuarioDto> getAll() throws Exception{
 		return usuarioServiceAPI.getAll();	
@@ -44,7 +47,10 @@ public class UsuarioRestController {
 	@GetMapping(value = "/find/{id}")
 	@ApiOperation(value="Retorna um usuário", notes = "Este endpoint retorna um usuário pelo String Id")
 	@ApiResponses({
-		@ApiResponse(code = 204, message = "Busca de usuário pelo Id efetuada com sucesso!")
+		@ApiResponse(code = 204, message = "Busca de usuário pelo Id efetuada com sucesso!"),
+		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
+		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public UsuarioDto find (@PathVariable String id) throws Exception{
 		return usuarioServiceAPI.get(id);
@@ -53,7 +59,10 @@ public class UsuarioRestController {
 	@PostMapping(value = "/save/{id}")
 	@ApiOperation(value="Cadastra e Atualiza um usuário", notes = "Parâmetro null cria um novo usuário e Parâmetro Id atualiza um usuário")
 	@ApiResponses({
-		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!")
+		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!"),
+		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
+		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public ResponseEntity<String> save (@RequestBody @Valid Usuario usuario, @PathVariable String id) throws Exception {
 	if (id == null || id.length() == 0 || id.equals("null")) {
@@ -67,7 +76,10 @@ public class UsuarioRestController {
 	@GetMapping(value = "/delete/{id}")
 	@ApiOperation(value="Deleta um usuário", notes = "Usar parâmetro id String para deletar um usuário")
 	@ApiResponses({
-		@ApiResponse(code = 204, message = "Usuário excluído com sucesso!")
+		@ApiResponse(code = 204, message = "Usuário excluído com sucesso!"),
+		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
+		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public ResponseEntity<UsuarioDto> delete (@PathVariable String id) throws Exception{
 		UsuarioDto usuario = usuarioServiceAPI.get(id);
