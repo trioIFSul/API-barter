@@ -39,9 +39,13 @@ public class CategoriaRestController {
 	@Cacheable(value="listaDeCategorias")
 	@ApiOperation(value="Retorna uma lista de Categorias")
 	@ApiResponses({
-		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!")
+		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!"),
+		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
+		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public List<CategoriaDto> getAll() throws Exception {
+		System.out.println("Executando metodo de listado de categorias !!! ");
 		return categoriaServiceAPI.getAll();
 		
 	}
@@ -49,7 +53,10 @@ public class CategoriaRestController {
 	@GetMapping(value = "/find/{id}")
 	@ApiOperation(value="Retorna uma categoria", notes = "Este endpoint retorna uma categoria pelo String ID")
 	@ApiResponses({
-		@ApiResponse(code = 204, message = "Busca de categoria pelo Id efetuada com sucesso!")
+		@ApiResponse(code = 204, message = "Busca de categoria pelo Id efetuada com sucesso!"),
+		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
+		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public CategoriaDto find(@PathVariable String id) throws Exception {
 		return categoriaServiceAPI.get(id);
@@ -59,7 +66,10 @@ public class CategoriaRestController {
 	@ApiOperation(value="Cadastra e Atualiza uma categoria", notes = "Parâmetro null cria uma nova categoria e Parâmetro ID atualiza uma categoria")
 	@CacheEvict(value = "listaDeCategorias", allEntries = true)
 	@ApiResponses({
-		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!")
+		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!"),
+		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
+		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 
 	public ResponseEntity<String> save(@RequestBody @Valid Categoria categoria, @PathVariable String id) throws Exception {
@@ -77,7 +87,11 @@ public class CategoriaRestController {
 	@GetMapping(value = "/delete/{id}")
 	@ApiOperation(value="Deleta uma categoria", notes = "Usar parâmetro id String para deletar uma categoria")
 	@ApiResponses({
-		@ApiResponse(code = 204, message = "Categoria excluída com sucesso!")
+		@ApiResponse(code = 204, message = "Categoria excluída com sucesso!"),
+		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
+		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
+		
 	})
 	public ResponseEntity<CategoriaDto> delete(@PathVariable String id) throws Exception {
 		CategoriaDto categoria = categoriaServiceAPI.get(id);
