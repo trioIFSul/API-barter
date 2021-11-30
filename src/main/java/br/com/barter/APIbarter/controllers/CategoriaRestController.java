@@ -1,6 +1,7 @@
 package br.com.barter.APIbarter.controllers;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import javax.validation.Valid;
 
@@ -49,6 +50,13 @@ public class CategoriaRestController {
 		return categoriaServiceAPI.getAll();
 		
 	}
+	
+	@GetMapping(value = "/allASC")
+	public List<Categoria> Categorias() throws ExecutionException, InterruptedException {
+		System.out.println("Testando metodo de paginação !!! ");
+		return categoriaServiceAPI.getAllAsc();
+	}
+	
 
 	@GetMapping(value = "/find/{id}")
 	@ApiOperation(value="Retorna uma categoria", notes = "Este endpoint retorna uma categoria pelo String ID")
