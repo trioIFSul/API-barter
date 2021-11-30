@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,8 @@ import io.swagger.annotations.ApiResponses;
 @CrossOrigin(origins="*")
 public class ProdutoRestController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(ProdutoRestController.class);
+	
 	@Autowired
 	private ProdutoServiceAPI produtoServiceAPI;
 
@@ -41,7 +45,8 @@ public class ProdutoRestController {
 		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
-	public List<ProdutoDto> getAll() throws Exception {
+	public List<ProdutoDto> getAll() throws Exception {		
+		logger.info("Listando todas os Produtos");		
 		return produtoServiceAPI.getAll();
 	}
 
@@ -53,7 +58,8 @@ public class ProdutoRestController {
 		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
-	public ProdutoDto find(@PathVariable String id) throws Exception {
+	public ProdutoDto find(@PathVariable String id) throws Exception {		
+		logger.info("Visualizando 1 Produto por id {}", id);		
 		return produtoServiceAPI.get(id);
 	}
 
@@ -66,9 +72,11 @@ public class ProdutoRestController {
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public ResponseEntity<String> save(@RequestBody @Valid Produto produto, @PathVariable String id) throws Exception {
-		if (id == null || id.length() == 0 || id.equals("null")) {
+		if (id == null || id.length() == 0 || id.equals("null")) {			
+			logger.info("Criando Produto com data {}", produto);			
 			id = produtoServiceAPI.save(produto);
-		} else {
+		} else {			
+			logger.info("Atualizando Produto com data {}", produto);			
 			produtoServiceAPI.save(produto, id);
 		}
 		return new ResponseEntity<String>(id, HttpStatus.OK);
@@ -85,6 +93,7 @@ public class ProdutoRestController {
 	public ResponseEntity<ProdutoDto> delete(@PathVariable String id) throws Exception {
 		ProdutoDto produto = produtoServiceAPI.get(id);
 		if (produto != null) {
+			logger.info("Removendo Produto com id {}", id);
 			produtoServiceAPI.delete(id);
 		} else {
 			return new ResponseEntity<ProdutoDto>(HttpStatus.NO_CONTENT);

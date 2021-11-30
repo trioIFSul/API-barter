@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,8 @@ import io.swagger.annotations.ApiResponses;
 @CrossOrigin(origins="*")
 public class UsuarioRestController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(UsuarioRestController.class);
+	
 	@Autowired
 	private UsuarioServiceAPI usuarioServiceAPI;
 	
@@ -41,6 +45,7 @@ public class UsuarioRestController {
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public List<UsuarioDto> getAll() throws Exception{
+		logger.info("Listando todos os Usuarios");
 		return usuarioServiceAPI.getAll();	
 		}
 	
@@ -53,6 +58,7 @@ public class UsuarioRestController {
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public UsuarioDto find (@PathVariable String id) throws Exception{
+		logger.info("Visualizando 1 Usuario por id {}", id);
 		return usuarioServiceAPI.get(id);
 	}
 	
@@ -67,8 +73,10 @@ public class UsuarioRestController {
 	public ResponseEntity<String> save (@RequestBody @Valid Usuario usuario, @PathVariable String id) throws Exception {
 	if (id == null || id.length() == 0 || id.equals("null")) {
 		id = usuarioServiceAPI.save(usuario);
+		logger.info("Criando Usuario com data {}", usuario);
 	}else {
 		usuarioServiceAPI.save(usuario, id);
+		logger.info("Atualizando Usuario com data {}", usuario);
 	}
 	return new ResponseEntity<String>(id, HttpStatus.OK);
 	}
@@ -84,6 +92,7 @@ public class UsuarioRestController {
 	public ResponseEntity<UsuarioDto> delete (@PathVariable String id) throws Exception{
 		UsuarioDto usuario = usuarioServiceAPI.get(id);
 		if (usuario != null) {
+			logger.info("Removendo Usuario com id {}", id);
 			usuarioServiceAPI.delete(id);
 		} else {
 			return new ResponseEntity<UsuarioDto>(HttpStatus.NO_CONTENT);

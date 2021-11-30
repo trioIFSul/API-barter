@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -31,25 +34,26 @@ import io.swagger.annotations.ApiResponses;
 @CrossOrigin(origins="*")
 public class CategoriaRestController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(CategoriaRestController.class);
+	
 	@Autowired
 	private CategoriaServiceAPI categoriaServiceAPI;
-
+		
 	@GetMapping(value = "/all")
 	@Cacheable(value="listaDeCategorias")
 	@ApiOperation(value="Retorna uma lista de Categorias")
 	@ApiResponses({
-		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!"),
+		@ApiResponse(code = 204, message = "Operação efetuaida com sucesso!"),
 		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
 		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
-	public List<CategoriaDto> getAll() throws Exception {
-		System.out.println("Executando metodo de listado de categorias !!! ");
-		return categoriaServiceAPI.getAll();
-		
-	}
-
-	@GetMapping(value = "/find/{id}")
+	public List<CategoriaDto> getAll() throws Exception {				
+		logger.info("Listando todas as Categorias");		
+		return categoriaServiceAPI.getAll();		
+	}		
+	
+	@GetMapping(value = "/find/{id}")	
 	@ApiOperation(value="Retorna uma categoria", notes = "Este endpoint retorna uma categoria pelo String ID")
 	@ApiResponses({
 		@ApiResponse(code = 204, message = "Busca de categoria pelo Id efetuada com sucesso!"),
@@ -57,7 +61,8 @@ public class CategoriaRestController {
 		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
-	public CategoriaDto find(@PathVariable String id) throws Exception {
+	public CategoriaDto find(@PathVariable String id) throws Exception {		
+		logger.info("Visualizando 1 Categoria por id {}", id);		
 		return categoriaServiceAPI.get(id);
 	}
 	
@@ -71,12 +76,15 @@ public class CategoriaRestController {
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public ResponseEntity<String> save(@RequestBody @Valid Categoria categoria, @PathVariable String id) throws Exception {
+				
 	
 		if (id == null || id.length() == 0 || id.equals("null")) {
 			id = categoriaServiceAPI.save(categoria);
+			logger.info("Criando Categoria com data {}", categoria);
 		
 		} else {
 			categoriaServiceAPI.save(categoria, id);
+			logger.info("Atualizando Categoria com data {}", categoria);
 		}
 		return new ResponseEntity<String>(id, HttpStatus.OK);
 	}
@@ -84,6 +92,7 @@ public class CategoriaRestController {
 	
 	@GetMapping(value = "/delete/{id}")
 	@ApiOperation(value="Deleta uma categoria", notes = "Usar parâmetro id String para deletar uma categoria")
+	@CacheEvict(value = "listaDeCategorias", allEntries = true)
 	@ApiResponses({
 		@ApiResponse(code = 204, message = "Categoria excluída com sucesso!"),
 		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
@@ -91,10 +100,12 @@ public class CategoriaRestController {
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 		
 	})
-	public ResponseEntity<CategoriaDto> delete(@PathVariable String id) throws Exception {
+	public ResponseEntity<CategoriaDto> delete(@PathVariable String id) throws Exception {		
+		
 		CategoriaDto categoria = categoriaServiceAPI.get(id);
 		
 		if (categoria != null) {
+			logger.info("Removendo Categoria com id {}", id);
 			categoriaServiceAPI.delete(id);
 	
 		} else {
