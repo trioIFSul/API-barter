@@ -1,6 +1,7 @@
 package br.com.barter.APIbarter.controllers;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import javax.validation.Valid;
 
@@ -35,19 +36,23 @@ public class UsuarioRestController {
 	
 	@Autowired
 	private UsuarioServiceAPI usuarioServiceAPI;
-	
+
 	@GetMapping(value = "/all")
-	@ApiOperation(value="Retorna uma lista de Usuários")
-	@ApiResponses({
-		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!"),
-		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
-		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
-		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
-	})
-	public List<UsuarioDto> getAll() throws Exception{
+	@ApiOperation(value = "Retorna uma lista de Usuários")
+	@ApiResponses({ @ApiResponse(code = 204, message = "Operação efetuada com sucesso!"),
+			@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
+			@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+			@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.") })
+	public List<UsuarioDto> getAll() throws Exception {
 		logger.info("Listando todos os Usuarios");
-		return usuarioServiceAPI.getAll();	
-		}
+		return usuarioServiceAPI.getAll();
+	}
+
+	@GetMapping(value = "/allASC")
+	public List<Usuario> Usuarios() throws ExecutionException, InterruptedException {
+		logger.info("Testando metodo de paginação !!! ");
+		return usuarioServiceAPI.getAllAsc();
+	}
 	
 	@GetMapping(value = "/find/{id}")
 	@ApiOperation(value="Retorna um usuário", notes = "Este endpoint retorna um usuário pelo String Id")

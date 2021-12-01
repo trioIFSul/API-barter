@@ -59,7 +59,7 @@ public class CategoriaRestController {
 	
 	@GetMapping(value = "/allASC")
 	public List<Categoria> Categorias() throws ExecutionException, InterruptedException {
-		System.out.println("Testando metodo de paginação !!! ");
+		logger.info("Testando metodo de paginação !!! ");
 		return categoriaServiceAPI.getAllAsc();
 	}
 	

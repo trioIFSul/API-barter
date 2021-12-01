@@ -1,6 +1,7 @@
 package br.com.barter.APIbarter.controllers;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import javax.validation.Valid;
 
@@ -48,6 +49,13 @@ public class ProdutoRestController {
 	public List<ProdutoDto> getAll() throws Exception {		
 		logger.info("Listando todas os Produtos");		
 		return produtoServiceAPI.getAll();
+	}
+	
+	
+	@GetMapping(value = "/allASC")
+	public List<Produto> Produtos() throws ExecutionException, InterruptedException {
+		logger.info("Testando metodo de paginação !!! ");
+		return produtoServiceAPI.getAllAsc();
 	}
 
 	@GetMapping(value = "/find/{id}")
