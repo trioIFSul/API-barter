@@ -8,6 +8,7 @@
 		<version>2.6.0</version>
 		<relativePath/> 
 	</parent>
+	
 	<groupId>br.com.barter</groupId>
 	<artifactId>API-barter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
