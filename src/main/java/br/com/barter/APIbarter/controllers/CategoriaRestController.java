@@ -47,7 +47,7 @@ public class CategoriaRestController {
 	@ApiResponses({
 		@ApiResponse(code = 204, message = "Operação efetuaida com sucesso!"),
 		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
-		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 403, message = "Proibido. O cliente se autenticou mas nao tem a permissao para aceder ao recurso solicitado."),
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 
@@ -57,22 +57,43 @@ public class CategoriaRestController {
 		
 	}
 	
+	
+
 	@GetMapping(value = "/allASC")
-	public List<Categoria> Categorias() throws ExecutionException, InterruptedException {
+	@ApiOperation(value="Lista de Categorias paginada em ordem ASCENDENTE")
+	@ApiResponses({
+		@ApiResponse(code = 204, message = "Operação efetuaida com sucesso!"),
+		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
+		@ApiResponse(code = 403, message = "Proibido. O cliente se autenticou mas nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
+	})
+	public List<Categoria> CategoriasASC() throws ExecutionException, InterruptedException {
 		logger.info("Testando metodo de paginação !!! ");
 		return categoriaServiceAPI.getAllAsc();
 	}
 	
-
+	
+	@GetMapping(value = "/allDEC")
+	@ApiOperation(value="Lista de Categorias paginada em ordem DECRESCENTE")
+	@ApiResponses({
+		@ApiResponse(code = 204, message = "Operação efetuaida com sucesso!"),
+		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
+		@ApiResponse(code = 403, message = "Proibido. O cliente se autenticou mas nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
+	})
+	public List<Categoria> CategoriasDEC() throws ExecutionException, InterruptedException {
+		logger.info("Testando metodo de paginação em ordem decrescente!!! ");
+		return categoriaServiceAPI.getAllDec();
+	}
+	
 	
 	
 	@GetMapping(value = "/find/{id}")	
-
 	@ApiOperation(value="Retorna uma categoria", notes = "Este endpoint retorna uma categoria pelo String ID")
 	@ApiResponses({
 		@ApiResponse(code = 204, message = "Busca de categoria pelo Id efetuada com sucesso!"),
 		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
-		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 403, message = "Proibido. O cliente se autenticou mas nao tem a permissao para aceder ao recurso solicitado."),
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public CategoriaDto find(@PathVariable String id) throws Exception {		
@@ -86,7 +107,7 @@ public class CategoriaRestController {
 	@ApiResponses({
 		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!"),
 		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
-		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 403, message = "Proibido. O cliente se autenticou mas nao tem a permissao para aceder ao recurso solicitado."),
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 
@@ -111,7 +132,7 @@ public class CategoriaRestController {
 	@ApiResponses({
 		@ApiResponse(code = 204, message = "Categoria excluída com sucesso!"),
 		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
-		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 403, message = "Proibido. O cliente se autenticou mas nao tem a permissao para aceder ao recurso solicitado."),
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 		
 	})

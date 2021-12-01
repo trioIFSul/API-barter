@@ -11,4 +11,6 @@ public interface UsuarioServiceAPI extends GenericServiceAPI<Usuario, UsuarioDto
 
 	List<Usuario> getAllAsc() throws InterruptedException, ExecutionException;
 
+	List<Usuario> getAllDec() throws InterruptedException, ExecutionException;
+
 }

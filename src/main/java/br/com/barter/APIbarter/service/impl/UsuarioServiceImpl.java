@@ -45,5 +45,19 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario, UsuarioDto> 
 
 		return usuarios;
 	}
+	
+	public List<Usuario> getAllDec() throws InterruptedException, ExecutionException {
+
+		ApiFuture<QuerySnapshot> query = (ApiFuture<QuerySnapshot>) firestore
+				.collection(TablesConstants.COLLECTION_USUARIO).orderBy("codigo_usuario", Direction.DESCENDING).limit(4)
+				.get();
+
+		List<Usuario> usuarios = new ArrayList<>();
+		for (QueryDocumentSnapshot usuario : query.get().getDocuments()) {
+			usuarios.add(usuario.toObject(Usuario.class));
+		}
+
+		return usuarios;
+	}
 
 }

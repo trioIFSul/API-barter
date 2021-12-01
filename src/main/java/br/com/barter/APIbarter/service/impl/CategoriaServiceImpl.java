@@ -48,4 +48,18 @@ public class CategoriaServiceImpl extends GenericServiceImpl<Categoria, Categori
 		return categorias;
 	}
 
+	public List<Categoria> getAllDec() throws InterruptedException, ExecutionException {
+
+		ApiFuture<QuerySnapshot> query = (ApiFuture<QuerySnapshot>) firestore
+				.collection(TablesConstants.COLLECTION_CATEGORIA).orderBy("codigo_categoria", Direction.DESCENDING)
+				.limit(4).get();
+
+		List<Categoria> categorias = new ArrayList<>();
+		for (QueryDocumentSnapshot categoria : query.get().getDocuments()) {
+			categorias.add(categoria.toObject(Categoria.class));
+		}
+
+		return categorias;
+	}
+
 }

@@ -12,5 +12,7 @@ public interface CategoriaServiceAPI extends GenericServiceAPI<Categoria, Catego
 
 	List<Categoria> getAllAsc() throws InterruptedException, ExecutionException;
 
+	List<Categoria> getAllDec() throws InterruptedException, ExecutionException;
+
 	
 }

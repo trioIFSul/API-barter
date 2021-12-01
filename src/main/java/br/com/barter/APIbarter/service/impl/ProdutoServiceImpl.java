@@ -45,4 +45,20 @@ public class ProdutoServiceImpl extends GenericServiceImpl<Produto, ProdutoDto> 
 		return produtos;
 	}
 
+	
+	
+	public List<Produto> getAllDec() throws InterruptedException, ExecutionException {
+
+		ApiFuture<QuerySnapshot> query = (ApiFuture<QuerySnapshot>) firestore
+				.collection(TablesConstants.COLLECTION_PRODUTO).orderBy("codigo_produto", Direction.DESCENDING)
+				.limit(4).get();
+
+		List<Produto> produtos = new ArrayList<>();
+		for (QueryDocumentSnapshot produto : query.get().getDocuments()) {
+			produtos.add(produto.toObject(Produto.class));
+		}
+
+		return produtos;
+	}
+	
 }

@@ -43,7 +43,7 @@ public class ProdutoRestController {
 	@ApiResponses({
 		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!"),
 		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
-		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 403, message = "Proibido. O cliente se autenticou mas nao tem a permissao para aceder ao recurso solicitado."),
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public List<ProdutoDto> getAll() throws Exception {		
@@ -53,17 +53,40 @@ public class ProdutoRestController {
 	
 	
 	@GetMapping(value = "/allASC")
-	public List<Produto> Produtos() throws ExecutionException, InterruptedException {
+	@ApiOperation(value="Lista de Produtos paginada em ordem ASCENDENTE")
+	@ApiResponses({
+		@ApiResponse(code = 204, message = "Operação efetuaida com sucesso!"),
+		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
+		@ApiResponse(code = 403, message = "Proibido. O cliente se autenticou mas nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
+	})
+	public List<Produto> ProdutosASC() throws ExecutionException, InterruptedException {
 		logger.info("Testando metodo de paginação !!! ");
 		return produtoServiceAPI.getAllAsc();
+		
 	}
+	
+	@GetMapping(value = "/allDEC")
+	@ApiOperation(value="Lista de Produtos paginada em ordem DECRESCENTE")
+	@ApiResponses({
+		@ApiResponse(code = 204, message = "Operação efetuaida com sucesso!"),
+		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
+		@ApiResponse(code = 403, message = "Proibido. O cliente se autenticou mas nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
+	})
+	public List<Produto> ProdutosDEC() throws ExecutionException, InterruptedException {
+		logger.info("Testando metodo de paginação em ordem decrescente!!! ");
+		return produtoServiceAPI.getAllDec();
+	}
+	
+	
 
 	@GetMapping(value = "/find/{id}")
 	@ApiOperation(value="Retorna um produto", notes = "Este endpoint retorna um produto pelo String ID")
 	@ApiResponses({
 		@ApiResponse(code = 204, message = "Busca de produto pelo Id efetuada com sucesso!"),
 		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
-		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 403, message = "Proibido. O cliente se autenticou mas nao tem a permissao para aceder ao recurso solicitado."),
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public ProdutoDto find(@PathVariable String id) throws Exception {		
@@ -76,7 +99,7 @@ public class ProdutoRestController {
 	@ApiResponses({
 		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!"),
 		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
-		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 403, message = "Proibido. O cliente se autenticou mas nao tem a permissao para aceder ao recurso solicitado."),
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public ResponseEntity<String> save(@RequestBody @Valid Produto produto, @PathVariable String id) throws Exception {
@@ -95,7 +118,7 @@ public class ProdutoRestController {
 	@ApiResponses({
 		@ApiResponse(code = 204, message = "Produto excluído com sucesso!"),
 		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
-		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 403, message = "Proibido. O cliente se autenticou mas nao tem a permissao para aceder ao recurso solicitado."),
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public ResponseEntity<ProdutoDto> delete(@PathVariable String id) throws Exception {

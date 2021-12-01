@@ -41,7 +41,7 @@ public class UsuarioRestController {
 	@ApiOperation(value = "Retorna uma lista de Usuários")
 	@ApiResponses({ @ApiResponse(code = 204, message = "Operação efetuada com sucesso!"),
 			@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
-			@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+			@ApiResponse(code = 403, message = "Proibido. O cliente se autenticou mas nao tem a permissao para aceder ao recurso solicitado."),
 			@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.") })
 	public List<UsuarioDto> getAll() throws Exception {
 		logger.info("Listando todos os Usuarios");
@@ -49,17 +49,41 @@ public class UsuarioRestController {
 	}
 
 	@GetMapping(value = "/allASC")
-	public List<Usuario> Usuarios() throws ExecutionException, InterruptedException {
-		logger.info("Testando metodo de paginação !!! ");
+	@ApiOperation(value="Lista de Usuários paginada em ordem ASCENDENTE")
+	@ApiResponses({
+		@ApiResponse(code = 204, message = "Operação efetuaida com sucesso!"),
+		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
+		@ApiResponse(code = 403, message = "Proibido. O cliente se autenticou mas nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
+	})
+	public List<Usuario> UsuariosASC() throws ExecutionException, InterruptedException {
+		logger.info("Testando metodo de paginação em ordem crescente!!! ");
 		return usuarioServiceAPI.getAllAsc();
 	}
+	
+	
+	
+	@GetMapping(value = "/allDEC")
+	@ApiOperation(value="Lista de Usuários paginada em ordem DECRESCENTE")
+	@ApiResponses({
+		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!"),
+		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
+		@ApiResponse(code = 403, message = "Proibido. O cliente se autenticou mas nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
+	})
+	public List<Usuario> UsuariosDEC() throws ExecutionException, InterruptedException {
+		logger.info("Testando metodo de paginação em ordem decrescente !!! ");
+		return usuarioServiceAPI.getAllDec();
+	}
+	
+	
 	
 	@GetMapping(value = "/find/{id}")
 	@ApiOperation(value="Retorna um usuário", notes = "Este endpoint retorna um usuário pelo String Id")
 	@ApiResponses({
 		@ApiResponse(code = 204, message = "Busca de usuário pelo Id efetuada com sucesso!"),
 		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
-		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 403, message = "Proibido. O cliente se autenticou mas nao tem a permissao para aceder ao recurso solicitado."),
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public UsuarioDto find (@PathVariable String id) throws Exception{
@@ -72,7 +96,7 @@ public class UsuarioRestController {
 	@ApiResponses({
 		@ApiResponse(code = 204, message = "Operação efetuada com sucesso!"),
 		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
-		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 403, message = "Proibido. O cliente se autenticou mas nao tem a permissao para aceder ao recurso solicitado."),
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public ResponseEntity<String> save (@RequestBody @Valid Usuario usuario, @PathVariable String id) throws Exception {
@@ -91,7 +115,7 @@ public class UsuarioRestController {
 	@ApiResponses({
 		@ApiResponse(code = 204, message = "Usuário excluído com sucesso!"),
 		@ApiResponse(code = 401, message = "Usuario nao autorizado para esta operacao!"),
-		@ApiResponse(code = 403, message = "Prohibido. O cliente se autentico mais nao tem a permissao para aceder ao recurso solicitado."),
+		@ApiResponse(code = 403, message = "Proibido. O cliente se autenticou mas nao tem a permissao para aceder ao recurso solicitado."),
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public ResponseEntity<UsuarioDto> delete (@PathVariable String id) throws Exception{
