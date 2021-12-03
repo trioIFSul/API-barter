@@ -85,8 +85,7 @@ public class CategoriaRestController {
 		logger.info("Testando metodo de paginação em ordem decrescente!!! ");
 		return categoriaServiceAPI.getAllDec();
 	}
-	
-	
+		
 	
 	@GetMapping(value = "/find/{id}")	
 	@ApiOperation(value="Retorna uma categoria", notes = "Este endpoint retorna uma categoria pelo String ID")
@@ -101,6 +100,9 @@ public class CategoriaRestController {
 		return categoriaServiceAPI.get(id);
 	}
 	
+	
+	
+	//-----------------------------------------------------------------------------------------------------------------------------------------
 	@PostMapping(value = "/save/{id}")
 	@ApiOperation(value="Cadastra e Atualiza uma categoria", notes = "Parâmetro null cria uma nova categoria e Parâmetro ID atualiza uma categoria")
 	@CacheEvict(value = "listaDeCategorias", allEntries = true)
@@ -124,7 +126,10 @@ public class CategoriaRestController {
 		}
 		return new ResponseEntity<String>(id, HttpStatus.OK);
 	}
-
+	//-----------------------------------------------------------------------------------------------------------------------------------------
+	
+	
+	
 	
 	@GetMapping(value = "/delete/{id}")
 	@ApiOperation(value="Deleta uma categoria", notes = "Usar parâmetro id String para deletar uma categoria")

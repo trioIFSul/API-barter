@@ -17,10 +17,12 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 @Valid
 @RestControllerAdvice
-public class RestExceptionHandler {
+public class RestExceptionHandlerForms {
+	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
@@ -39,8 +41,7 @@ public class RestExceptionHandler {
 		});
 		
 		return dto;
-	}
-	
-	 
+	}	
+ 
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.springframework.http.HttpStatus;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -49,6 +50,7 @@ public abstract class GenericServiceImpl<I,O> implements GenericServiceAPI<I,O> 
 		getCollection().document(id).delete().get();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public O get(String id) throws Exception {
 		DocumentReference ref = getCollection().document(id);
@@ -59,7 +61,9 @@ public abstract class GenericServiceImpl<I,O> implements GenericServiceAPI<I,O> 
 			PropertyUtils.setProperty(object, "id", document.getId());
 			return object;
 		}
-		return null;
+		return (O) HttpStatus.BAD_REQUEST;
+		//return null;
+		
 	}
 
 	@Override
