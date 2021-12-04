@@ -47,7 +47,7 @@ public class ProdutoRestController {
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public List<ProdutoDto> getAll() throws Exception {		
-		logger.info("Listando todas os Produtos");		
+		logger.info("Listando todas os Produtos");	
 		return produtoServiceAPI.getAll();
 	}
 	
