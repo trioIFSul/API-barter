@@ -18,7 +18,7 @@ public class ErrorResponse {
 	  
 	  private String message;
 	  
-	  private Date timestamp;
+	  private String timestamp;
 	  
 	  List<String> errors;
 	  
