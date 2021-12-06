@@ -5,8 +5,6 @@ import java.util.Map;
 
 import com.google.cloud.firestore.CollectionReference;
 
-import br.com.barter.APIbarter.dto.CategoriaDto;
-
 public interface GenericServiceAPI<I, O> {
 
 	String save(I entity, String id) throws Exception;
