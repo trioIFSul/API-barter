@@ -16,20 +16,18 @@ import org.springframework.test.web.servlet.MockMvc;
 class HelloControllerTest {
 
 	@Autowired
-	private MockMvc mockMvc;
+	private MockMvc mockMvc;  //principal ponto de entrada para o controller
 
-//	@MockBean
-//	private HelloController helloController;	
+	
 	
 	@Test
 	public void hello() throws Exception {
-		mockMvc.perform(get("/")
+		mockMvc
+				.perform(get("/")
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().string("Hello World!"));
 	}
-
-
 	
 	
 }
