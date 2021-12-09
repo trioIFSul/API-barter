@@ -6,19 +6,21 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.springframework.http.HttpStatus;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.Query;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
 
 public abstract class GenericServiceImpl<I,O> implements GenericServiceAPI<I,O> {
 
 	public Class<O> clazz;
-
-	@SuppressWarnings("unchecked")
+	
 	public GenericServiceImpl() {
 		this.clazz = ((Class<O>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1]);
 	}
@@ -54,7 +56,9 @@ public abstract class GenericServiceImpl<I,O> implements GenericServiceAPI<I,O> 
 			PropertyUtils.setProperty(object, "id", document.getId());
 			return object;
 		}
-		return null;
+		return (O) HttpStatus.BAD_REQUEST;
+		//return null;
+		
 	}
 
 	@Override
@@ -68,7 +72,7 @@ public abstract class GenericServiceImpl<I,O> implements GenericServiceAPI<I,O> 
 			result.add(object);
 		}
 		return result;
-	}
+	}	
 
 	@Override
 	public Map<String, Object> getAsMap(String id) throws Exception {
@@ -82,5 +86,21 @@ public abstract class GenericServiceImpl<I,O> implements GenericServiceAPI<I,O> 
 	}
 
 	public abstract CollectionReference getCollection();
+	
+	
+	@JsonDeserialize
+	@Override
+	public CollectionReference getAllpage() throws Exception {
+		
+		List<O> result = new ArrayList<O>();
+		ApiFuture<QuerySnapshot> query = getCollection().get();
+		List<QueryDocumentSnapshot> documents = query.get().getDocuments();
+		DocumentReference db = getCollection().document();
+		CollectionReference categorias = db.collection("categorias");
+		Query firstPage = categorias.orderBy("nome").limit(20);
+		
+	
+		return null;
+	}
 	
 }

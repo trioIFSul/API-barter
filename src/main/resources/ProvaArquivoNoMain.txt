@@ -1,1 +1,0 @@
-Arquivo criado so para comprovar estando na rama principal do repositorio (main local).

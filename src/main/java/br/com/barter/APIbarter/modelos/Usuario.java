@@ -1,5 +1,6 @@
 package br.com.barter.APIbarter.modelos;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
@@ -11,8 +12,8 @@ import lombok.Data;
 @Data
 public class Usuario {
 	
-	@NotNull 
-	private int codigo_usuario;
+	@NotNull @Min(value=1, message="Valor minimo e 1")
+	private int codigoUsuario;
 	@NotNull @NotEmpty @Length (min = 5)
 	private String nome;
 	@NotNull @NotEmpty @Length (min = 5)
