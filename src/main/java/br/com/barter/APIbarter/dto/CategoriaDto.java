@@ -9,7 +9,7 @@ public class CategoriaDto {
 	
 	private String id;
 	
-	private int codigo_categoria;
+	private int codigoCategoria;
 
 	private String nome;
 

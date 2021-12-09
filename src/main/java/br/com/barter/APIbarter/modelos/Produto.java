@@ -14,7 +14,7 @@ import lombok.Data;
 public class Produto {
  
 	@NotNull @Min(value=1, message="Valor minimo e 1")
-	private int codigo_produto;
+	private int codigoProduto;
 	@NotNull @NotEmpty @Length (min = 5)
 	private String nome;
 	@NotNull @NotEmpty @Length (min = 5)
@@ -22,8 +22,8 @@ public class Produto {
 	@NotNull @NotEmpty @Length (min = 5)
 	private String imgUrl;
 	@NotNull @Min(value=1, message="Valor minimo e 1")
-	private int codigo_categoria;
+	private int codigoCategoria;
 	@NotNull @Min(value=1, message="Valor minimo e 1")
-	private int codigo_usuario;
+	private int codigoUsuario;
  
 }

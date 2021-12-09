@@ -35,7 +35,7 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario, UsuarioDto> 
 	public List<Usuario> getAllAsc() throws InterruptedException, ExecutionException {
 
 		ApiFuture<QuerySnapshot> query = (ApiFuture<QuerySnapshot>) firestore
-				.collection(TablesConstants.COLLECTION_USUARIO).orderBy("codigo_usuario", Direction.ASCENDING).limit(4)
+				.collection(TablesConstants.COLLECTION_USUARIO).orderBy("codigoUsuario", Direction.ASCENDING).limit(4)
 				.get();
 
 		List<Usuario> usuarios = new ArrayList<>();
@@ -49,7 +49,7 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario, UsuarioDto> 
 	public List<Usuario> getAllDec() throws InterruptedException, ExecutionException {
 
 		ApiFuture<QuerySnapshot> query = (ApiFuture<QuerySnapshot>) firestore
-				.collection(TablesConstants.COLLECTION_USUARIO).orderBy("codigo_usuario", Direction.DESCENDING).limit(4)
+				.collection(TablesConstants.COLLECTION_USUARIO).orderBy("codigoUsuario", Direction.DESCENDING).limit(4)
 				.get();
 
 		List<Usuario> usuarios = new ArrayList<>();

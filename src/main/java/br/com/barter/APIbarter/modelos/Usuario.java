@@ -13,7 +13,7 @@ import lombok.Data;
 public class Usuario {
 	
 	@NotNull @Min(value=1, message="Valor minimo e 1")
-	private int codigo_usuario;
+	private int codigoUsuario;
 	@NotNull @NotEmpty @Length (min = 5)
 	private String nome;
 	@NotNull @NotEmpty @Length (min = 5)

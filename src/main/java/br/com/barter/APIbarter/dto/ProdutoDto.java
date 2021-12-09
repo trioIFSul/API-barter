@@ -8,7 +8,7 @@ public class ProdutoDto {
 	
 	private String id;
 	
-	private int codigo_produto;
+	private int codigoProduto;
 	
 	private String nome;
 
@@ -16,7 +16,7 @@ public class ProdutoDto {
 
 	private String imgUrl;
 
-	private int codigo_categoria;
+	private int codigoCategoria;
 	
-	private int codigo_usuario;
+	private int codigoUsuario;
 }

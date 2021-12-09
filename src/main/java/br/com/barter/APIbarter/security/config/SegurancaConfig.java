@@ -43,18 +43,12 @@ public class SegurancaConfig extends WebSecurityConfigurerAdapter{
 	@Override
     public void configure(WebSecurity webSecurity) throws Exception {
        webSecurity.ignoring().antMatchers("/categorias/api/v1/all");
-       //webSecurity.ignoring().antMatchers("/categorias/api/v1/allASC");
-      // webSecurity.ignoring().antMatchers("/categorias/api/v1/allDEC");
        webSecurity.ignoring().antMatchers("/categorias/api/v1/find/**");
        
        webSecurity.ignoring().antMatchers("/produtos/api/v1/all");
-      // webSecurity.ignoring().antMatchers("/produtos/api/v1/allASC");
-      // webSecurity.ignoring().antMatchers("/produtos/api/v1/allDEC");
        webSecurity.ignoring().antMatchers("/produtos/api/v1/find/**");
        
        webSecurity.ignoring().antMatchers("/usuarios/api/v1/all");
-      // webSecurity.ignoring().antMatchers("/usuarios/api/v1/allASC");
-      // webSecurity.ignoring().antMatchers("/usuarios/api/v1/allDEC");
        webSecurity.ignoring().antMatchers("/usuarios/api/v1/find/**");
        
        webSecurity.ignoring().antMatchers("/v2/api-docs",

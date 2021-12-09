@@ -13,7 +13,7 @@ public class UsuarioDto {
 
 	private String id;
 
-	private int codigo_usuario;
+	private int codigoUsuario;
 
 	private String nome;
 	

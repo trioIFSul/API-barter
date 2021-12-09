@@ -37,7 +37,7 @@ public class CategoriaServiceImpl extends GenericServiceImpl<Categoria, Categori
 	public List<Categoria> getAllAsc() throws InterruptedException, ExecutionException { 
 		
 		ApiFuture<QuerySnapshot> query = (ApiFuture<QuerySnapshot>) firestore.collection(
-				TablesConstants.COLLECTION_CATEGORIA).orderBy("codigo_categoria", Direction.ASCENDING).limit(4).get();
+				TablesConstants.COLLECTION_CATEGORIA).orderBy("codigoCategoria", Direction.ASCENDING).limit(4).get();
 
 		
 		List<Categoria> categorias = new ArrayList<>();
@@ -51,7 +51,7 @@ public class CategoriaServiceImpl extends GenericServiceImpl<Categoria, Categori
 	public List<Categoria> getAllDec() throws InterruptedException, ExecutionException {
 
 		ApiFuture<QuerySnapshot> query = (ApiFuture<QuerySnapshot>) firestore
-				.collection(TablesConstants.COLLECTION_CATEGORIA).orderBy("codigo_categoria", Direction.DESCENDING)
+				.collection(TablesConstants.COLLECTION_CATEGORIA).orderBy("codigoCategoria", Direction.DESCENDING)
 				.limit(4).get();
 
 		List<Categoria> categorias = new ArrayList<>();
