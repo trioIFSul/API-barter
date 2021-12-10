@@ -34,7 +34,7 @@ public class ProdutoServiceImpl extends GenericServiceImpl<Produto, ProdutoDto> 
 	public List<Produto> getAllAsc() throws InterruptedException, ExecutionException {
 
 		ApiFuture<QuerySnapshot> query = (ApiFuture<QuerySnapshot>) firestore
-				.collection(TablesConstants.COLLECTION_PRODUTO).orderBy("codigo_produto", Direction.ASCENDING)
+				.collection(TablesConstants.COLLECTION_PRODUTO).orderBy("codigoProduto", Direction.ASCENDING)
 				.limit(4).get();
 
 		List<Produto> produtos = new ArrayList<>();
@@ -50,7 +50,7 @@ public class ProdutoServiceImpl extends GenericServiceImpl<Produto, ProdutoDto> 
 	public List<Produto> getAllDec() throws InterruptedException, ExecutionException {
 
 		ApiFuture<QuerySnapshot> query = (ApiFuture<QuerySnapshot>) firestore
-				.collection(TablesConstants.COLLECTION_PRODUTO).orderBy("codigo_produto", Direction.DESCENDING)
+				.collection(TablesConstants.COLLECTION_PRODUTO).orderBy("codigoProduto", Direction.DESCENDING)
 				.limit(4).get();
 
 		List<Produto> produtos = new ArrayList<>();

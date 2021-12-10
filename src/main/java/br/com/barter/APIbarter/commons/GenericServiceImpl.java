@@ -57,7 +57,7 @@ public abstract class GenericServiceImpl<I,O> implements GenericServiceAPI<I,O> 
 			return object;
 		}
 		return (O) HttpStatus.BAD_REQUEST;
-		//return null;
+		
 		
 	}
 

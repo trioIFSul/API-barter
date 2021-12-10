@@ -1,0 +1,8 @@
+dados:
+ admin:
+  user: hector
+  pass: $2a$10$drMTtQW0b8SDH9fmC/v/3eg43Jl4BxjqM/G/gyFApl8LN1T9euak6
+ user:
+  user: compasso
+  pass: $2a$10$oOYJS2ERlnkEZcSthuJXxOWC3I1AC3ZNU8jOeeLuySxsqXrbTHy0a
+

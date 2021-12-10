@@ -100,7 +100,7 @@ public class UsuarioRestController {
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public ResponseEntity<String> save (@RequestBody @Valid Usuario usuario, @PathVariable String id) throws Exception {
-	if (id == null || id.length() == 0 || id.equals("null")) {
+	if (id == null || id.length() == 0 || id.equals("new")) {
 		id = usuarioServiceAPI.save(usuario);
 		logger.info("Criando Usuario com data {}", usuario);
 	}else {

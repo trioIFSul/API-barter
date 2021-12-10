@@ -116,14 +116,14 @@ public class CategoriaRestController {
 	public ResponseEntity<String> save(@RequestBody @Valid Categoria categoria, @PathVariable String id) throws Exception {
 				
 	
-//		if (id == null || id.length() == 0 || id.equals("null")) {
-//			id = categoriaServiceAPI.save(categoria);
-//			logger.info("Criando Categoria com data {}", categoria);
+		if (id == null || id.length() == 0 || id.equals("new")) {
+			id = categoriaServiceAPI.save(categoria);
+			logger.info("Criando Categoria com data {}", categoria);
 		
-//		} else {
+		} else {
 			categoriaServiceAPI.save(categoria, id);
 			logger.info("Atualizando Categoria com data {}", categoria);
-//		}
+	}
 		return new ResponseEntity<String>(id, HttpStatus.OK);
 	}
 	//-----------------------------------------------------------------------------------------------------------------------------------------

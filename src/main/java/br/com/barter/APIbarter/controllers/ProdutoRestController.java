@@ -103,7 +103,7 @@ public class ProdutoRestController {
 		@ApiResponse(code = 404, message = "Nao encontrado: o recurso solicitado nao existe.")
 	})
 	public ResponseEntity<String> save(@RequestBody @Valid Produto produto, @PathVariable String id) throws Exception {
-		if (id == null || id.length() == 0 || id.equals("null")) {			
+		if (id == null || id.length() == 0 || id.equals("new")) {			
 			logger.info("Criando Produto com data {}", produto);			
 			id = produtoServiceAPI.save(produto);
 		} else {			

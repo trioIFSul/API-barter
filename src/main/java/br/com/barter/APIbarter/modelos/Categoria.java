@@ -15,7 +15,7 @@ import lombok.Data;
 public class Categoria {
 	
 	@NotNull  @Min(value=1, message="Valor minimo e 1")
-	private int codigo_categoria;
+	private int codigoCategoria;
 	@NotNull @NotEmpty @Length (min = 5, max = 20)
 	private String nome;
 	@NotNull @NotEmpty @Length (min = 5, max = 50)
