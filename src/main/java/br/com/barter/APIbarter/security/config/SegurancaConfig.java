@@ -60,12 +60,23 @@ public class SegurancaConfig extends WebSecurityConfigurerAdapter{
 	//permissoes -----------------------------------------------------------	
 	@Override
     public void configure(WebSecurity webSecurity) throws Exception {
+<<<<<<< HEAD
 	   
        webSecurity.ignoring().antMatchers("/categorias/api/v1/all");       
        webSecurity.ignoring().antMatchers("/categorias/api/v1/delete/**"); //para angular
        
        webSecurity.ignoring().antMatchers("/produtos/api/v1/all");     
        webSecurity.ignoring().antMatchers("/produtos/api/v1/delete/**"); //para angular
+=======
+       webSecurity.ignoring().antMatchers("/categorias/api/v1/all");
+       webSecurity.ignoring().antMatchers("/categorias/api/v1/find/**");
+       
+       webSecurity.ignoring().antMatchers("/produtos/api/v1/all");
+       webSecurity.ignoring().antMatchers("/produtos/api/v1/find/**");
+       
+       webSecurity.ignoring().antMatchers("/usuarios/api/v1/all");
+       webSecurity.ignoring().antMatchers("/usuarios/api/v1/find/**");
+>>>>>>> 9112c598c787cfff5681bf32fc07c4d5734cf90e
        
        webSecurity.ignoring().antMatchers("/usuarios/api/v1/all");     
        webSecurity.ignoring().antMatchers("/usuarios/api/v1/delete/**"); //para angular
